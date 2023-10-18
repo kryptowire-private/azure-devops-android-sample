@@ -2,7 +2,6 @@
 # Build your Java project and run tests with Gradle using a Gradle wrapper script.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - main
 
@@ -21,3 +20,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assemble'
+- task: Q-MAST@1
+  inputs:
+    filepath: 'app/build/outputs/apk/release/app-release-unsigned.apk'
+    apikey: 'TgcdC54uQ9GmCgRF0cJbm0dIzchalzlUVdMY'
+    platform: 'android'
+    resultsDir: '$(Common.TestResultsDirectory)/QuokkaResults'
+- task: PublishBuildArtifacts@1
+  inputs:
+   pathtoPublish: '$(Common.TestResultsDirectory)/QuokkaResults'
+   artifactName: 'QuokkaResults'
+   artifactType: 'container'
