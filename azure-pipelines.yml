@@ -22,6 +22,7 @@ steps:
     tasks: 'assemble'
 - task: Q-MAST@1
   inputs:
+    url: 'https://api.kryptowire.com/api'
     filepath: 'app/build/outputs/apk/release/app-release-unsigned.apk'
     apikey: 'TgcdC54uQ9GmCgRF0cJbm0dIzchalzlUVdMY'
     platform: 'android'
